@@ -1,5 +1,5 @@
 class Accommodation < ApplicationRecord
-  belongs_to :details
+  belongs_to :accomodation_details
 
   validates :name, presence: true, length: { minimum: 3, maximum: 255 }
   validates :image_url, presence: true, format: { with: %r{\Ahttps?://\S+\z}, message: 'Invalid URL format' }
