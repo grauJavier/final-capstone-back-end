@@ -15,7 +15,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_26_155958) do
   enable_extension "plpgsql"
 
   create_table "accommodation_details", force: :cascade do |t|
-    t.string "acommodation_type"
+    t.bigint "accommodation_id", null: false
+    t.string "accommodation_type"
     t.integer "bedrooms"
     t.integer "beds"
     t.integer "bathrooms"
@@ -23,15 +24,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_26_155958) do
     t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["accommodation_id"], name: "index_accommodation_details_on_accommodation_id"
   end
 
   create_table "accommodations", force: :cascade do |t|
     t.string "name"
-    t.bigint "accommodation_details_id", null: false
     t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["accommodation_details_id"], name: "index_accommodations_on_accommodation_details_id"
   end
 
   create_table "cities", force: :cascade do |t|
@@ -65,7 +65,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_26_155958) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "accommodations", "accommodation_details", column: "accommodation_details_id"
+  add_foreign_key "accommodation_details", "accommodations"
   add_foreign_key "reservations", "accommodations"
   add_foreign_key "reservations", "cities"
   add_foreign_key "reservations", "users"
