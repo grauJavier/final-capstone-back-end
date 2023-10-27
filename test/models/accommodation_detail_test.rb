@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class AccommodationDetailTest < ActiveSupport::TestCase
+class PlaceDetailTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

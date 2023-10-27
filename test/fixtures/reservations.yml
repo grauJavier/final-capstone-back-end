@@ -2,12 +2,12 @@
 
 one:
   user: one
-  accommodation: one
+  place: one
   schedule_date: 2023-10-26
   city: one
 
 two:
   user: two
-  accommodation: two
+  place: two
   schedule_date: 2023-10-26
   city: two
