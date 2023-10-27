@@ -18,9 +18,13 @@ Rails.application.routes.draw do
   # root "posts#index"
 
 
-  resources :reservations, only: [:index, :show, :create, :update, :destroy]
+  resources :reservations, only: [:index, :show, :create, :update, :destroy] 
+  
+  get "reservations/:reservation_id/city(.:format)" => "cities#show", as: :reservation_cities
+  resources :cities, only: [:index]
+
   resources :accommodations, only: [:index, :show, :create, :update, :destroy] do
-    resources :accommodation_details, only: [:index, :show, :create, :update, :destroy]
+    resources :accommodation_details, only: [:index]
   end
     
 end
