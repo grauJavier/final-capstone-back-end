@@ -39,6 +39,8 @@ cities.each do |city_name|
   City.create!(name: city_name)
 end
 
+city = City.find_by(name: 'Tokyo, Japan')
+
 # Reservation
 Reservation.create!(user: user, place: place, city: city, schedule_date:'2023-12-12')
 
