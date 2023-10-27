@@ -17,7 +17,27 @@ place = Place.create!(user: user, name: 'Hotel', image_url: image_url, descripti
 Detail.create!(place: place, place_type: 'Room', bedrooms: 2, beds: 2, bathrooms: 1, property_type: 'Hotel', price: 120);
 
 # City
-city = City.create!(name: 'Barcelona')
+cities = [
+  'New York City, USA',
+  'London, UK',
+  'Paris, France',
+  'Tokyo, Japan',
+  'Sydney, Australia',
+  'Shanghai, China',
+  'Berlin, Germany',
+  'Rome, Italy',
+  'Hong Kong, China',
+  'Dubai, UAE',
+  'Istanbul, Turkey',
+  'Singapore',
+  'Beijing, China',
+  'Seoul, South Korea',
+  'Moscow, Russia'
+]
+
+cities.each do |city_name|
+  City.create!(name: city_name)
+end
 
 # Reservation
 Reservation.create!(user: user, place: place, city: city, schedule_date:'2023-12-12')
