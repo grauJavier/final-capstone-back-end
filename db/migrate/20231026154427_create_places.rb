@@ -1,6 +1,6 @@
-class CreateAccommodations < ActiveRecord::Migration[7.1]
+class CreatePlaces < ActiveRecord::Migration[7.1]
   def change
-    create_table :accommodations do |t|
+    create_table :places do |t|
       t.string :name
       t.string :image_url
 

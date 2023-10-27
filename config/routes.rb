@@ -23,8 +23,8 @@ Rails.application.routes.draw do
   get "reservations/:reservation_id/city(.:format)" => "cities#show", as: :reservation_cities
   resources :cities, only: [:index]
 
-  resources :accommodations, only: [:index, :show, :create, :update, :destroy] do
-    resources :accommodation_details, only: [:index]
+  resources :places, only: [:index, :show, :create, :update, :destroy] do
+    resources :details, only: [:index]
   end
     
 end

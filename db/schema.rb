@@ -14,9 +14,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_26_202957) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "accommodation_details", force: :cascade do |t|
-    t.bigint "accommodation_id", null: false
-    t.string "accommodation_type"
+  create_table "cities", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "details", force: :cascade do |t|
+    t.bigint "place_id", null: false
+    t.string "place_type"
     t.integer "bedrooms"
     t.integer "beds"
     t.integer "bathrooms"
@@ -24,31 +30,25 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_26_202957) do
     t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["accommodation_id"], name: "index_accommodation_details_on_accommodation_id"
+    t.index ["place_id"], name: "index_details_on_place_id"
   end
 
-  create_table "accommodations", force: :cascade do |t|
+  create_table "places", force: :cascade do |t|
     t.string "name"
     t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "cities", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "reservations", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "accommodation_id", null: false
+    t.bigint "place_id", null: false
     t.date "schedule_date"
     t.bigint "city_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["accommodation_id"], name: "index_reservations_on_accommodation_id"
     t.index ["city_id"], name: "index_reservations_on_city_id"
+    t.index ["place_id"], name: "index_reservations_on_place_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
@@ -67,8 +67,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_26_202957) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "accommodation_details", "accommodations"
-  add_foreign_key "reservations", "accommodations"
+  add_foreign_key "details", "places"
   add_foreign_key "reservations", "cities"
+  add_foreign_key "reservations", "places"
   add_foreign_key "reservations", "users"
 end
