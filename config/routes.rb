@@ -19,5 +19,8 @@ Rails.application.routes.draw do
 
 
   resources :reservations, only: [:index, :show, :create, :update, :destroy]
-  resources :accommodations, only: [:index, :show, :create, :update, :destroy]
+  resources :accommodations, only: [:index, :show, :create, :update, :destroy] do
+    resources :accommodation_details, only: [:index, :show, :create, :update, :destroy]
+  end
+    
 end
