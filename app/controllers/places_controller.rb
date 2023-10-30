@@ -1,5 +1,5 @@
 class PlacesController < ApplicationController
-  before_action :find_places, only: [:create, :update, :destroy]
+  before_action :find_places, only: %i[create update destroy]
 
   def index
     places = Place.all
@@ -13,7 +13,7 @@ class PlacesController < ApplicationController
 
   def create
     place = @places.new(place_params)
-    details = place.build_detail(details_params)
+    place.build_detail(details_params)
     if place.save
       render json: place, status: :created
     else
