@@ -19,14 +19,15 @@ Rails.application.routes.draw do
 
 
   resources :users do
-    resources :reservations, only: [:index, :show, :create, :update, :destroy] 
+    resources :reservations, only: [:index, :show, :create, :update, :destroy]
     get "reservations/:reservation_id/city(.:format)" => "cities#show", as: :reservation_cities
+    resources :places, only: [:create, :update, :destroy]
   end
   
+  get "places/:place_id/details" => "details#index", as: :place_details
+  
+
   resources :cities, only: [:index]
 
-  resources :places, only: [:index, :show, :create, :update, :destroy] do
-    resources :details, only: [:index]
-  end
-    
+  resources :places, only: [:index, :show]
 end

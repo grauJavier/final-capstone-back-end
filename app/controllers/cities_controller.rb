@@ -7,13 +7,13 @@ class CitiesController < ApplicationController
   end
 
   def show
-    city = City.find(@reservation.city_id)
+    city = City.find_by(id: @reservation.city_id)
     render json: city
   end
 
   private
 
   def find_reservation
-    @reservation = Reservation.find(params[:reservation_id])
+    @reservation = Reservation.where(user_id: params[:user_id]).find_by(id: params[:reservation_id])
   end
 end
