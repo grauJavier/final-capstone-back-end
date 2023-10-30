@@ -1,6 +1,6 @@
 class DetailsController < ApplicationController
   def index
-    details = Detail.find_by(place_id: params[:place_id])
-    render json: details
+    details = Detail.includes(:place).find_by(place_id: params[:place_id])
+    render json: details.as_json(include: { place: { only: [:name, :image_url, :description] } })
   end
 end
