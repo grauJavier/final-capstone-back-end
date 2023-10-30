@@ -303,6 +303,7 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (>= 5.0)
   rack-cors
+  rack-test
   rails (~> 7.1.1)
   rails-controller-testing
   rspec-rails (>= 3.9.0)
