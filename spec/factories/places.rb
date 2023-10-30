@@ -6,6 +6,5 @@ FactoryBot.define do
     image_url { Faker::Internet.url }
     description { Faker::Lorem.sentence }
     user
-    association :detail, factory: :detail
   end
 end
