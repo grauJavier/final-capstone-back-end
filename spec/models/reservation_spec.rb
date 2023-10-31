@@ -8,7 +8,7 @@ RSpec.describe Reservation, type: :model do
     it { should validate_presence_of(:city) }
 
     it 'validates that schedule_date is in the future' do
-      reservation = build(:reservation, schedule_date: Date.yesterday)
+      reservation = build(:reservation, schedule_date: '2020-12-12')
       expect(reservation).to be_invalid
       expect(reservation.errors[:schedule_date]).to include('must be in the future')
     end
