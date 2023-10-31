@@ -48,6 +48,6 @@ class ReservationsController < ApplicationController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:place_id, :schedule_date, :city_id)
+    params.require(:reservation).permit(:place_id, :schedule_date)
   end
 end
