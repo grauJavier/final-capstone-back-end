@@ -17,6 +17,6 @@ RSpec.describe City, type: :model do
   end
 
   describe 'associations' do
-    it { should have_many(:reservations) }
+    it { should have_many(:places) }
   end
 end
