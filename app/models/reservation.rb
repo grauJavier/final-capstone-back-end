@@ -1,9 +1,8 @@
 class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :place
-  belongs_to :city
 
-  validates_presence_of :user, :place, :schedule_date, :city
+  validates_presence_of :user, :place, :schedule_date
   validate :schedule_date_in_future
 
   private

@@ -33,11 +33,9 @@ RSpec.describe 'Reservations API', type: :request do
     it 'creates a new reservation' do
       user = create(:user)
       place = create(:place)
-      city = create(:city)
 
       reservation_params = {
         place_id: place.id,
-        city_id: city.id,
         schedule_date: Date.tomorrow
       }
 

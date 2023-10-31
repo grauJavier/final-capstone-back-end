@@ -12,13 +12,13 @@ RSpec.describe 'Cities', type: :request do
     end
   end
 
-  describe 'GET /reservations/:reservation_id/city' do
-    it 'shows the city for a reservation' do
+  describe 'GET /places/:place_id/city' do
+    it 'shows the city for a place' do
       user = FactoryBot.create(:user)
       city = FactoryBot.create(:city)
-      reservation = FactoryBot.create(:reservation, user:, city:)
+      place = FactoryBot.create(:place, user:, city:)
 
-      get user_reservation_cities_path(user, reservation)
+      get user_place_cities_path(user, place)
 
       expect(response).to have_http_status(200)
       expect(response.body).to include(city.name)
