@@ -35,11 +35,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_26_202957) do
 
   create_table "places", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.bigint "city_id", null: false
     t.string "name"
     t.string "image_url"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_places_on_city_id"
     t.index ["user_id"], name: "index_places_on_user_id"
   end
 
@@ -47,10 +49,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_26_202957) do
     t.bigint "user_id", null: false
     t.bigint "place_id", null: false
     t.date "schedule_date"
-    t.bigint "city_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["city_id"], name: "index_reservations_on_city_id"
     t.index ["place_id"], name: "index_reservations_on_place_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
@@ -71,8 +71,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_26_202957) do
   end
 
   add_foreign_key "details", "places"
+  add_foreign_key "places", "cities"
   add_foreign_key "places", "users"
-  add_foreign_key "reservations", "cities"
   add_foreign_key "reservations", "places"
   add_foreign_key "reservations", "users"
 end

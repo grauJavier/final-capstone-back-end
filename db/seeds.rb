@@ -13,8 +13,6 @@ user = User.create!(username: 'Javier', email:'graujavier@gmail.com', password:'
 
 # Place
 image_url = 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/131210897.jpg?k=96dae0b1bb492a08ca3d2983d4c0f9ab91da5cf75d0921a1267160524a5b4d58&o=&hp=1'
-place = Place.create!(user: user, name: 'Hotel', image_url: image_url, description: 'Hotel description');
-Detail.create!(place: place, place_type: 'Room', bedrooms: 2, beds: 2, bathrooms: 1, property_type: 'Hotel', price: 120);
 
 # City
 cities = [
@@ -41,7 +39,11 @@ end
 
 city = City.find_by(name: 'Tokyo, Japan')
 
+place = Place.create!(user: user, city: city, name: 'Hotel', image_url: image_url, description: 'Hotel description');
+
+Detail.create!(place: place, place_type: 'Room', bedrooms: 2, beds: 2, bathrooms: 1, property_type: 'Hotel', price: 120);
+
 # Reservation
-Reservation.create!(user: user, place: place, city: city, schedule_date:'2023-12-12')
+Reservation.create!(user: user, place: place, schedule_date:'2023-12-12')
 
 puts 'Seeds created successfully!'
