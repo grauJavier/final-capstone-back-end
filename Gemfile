@@ -48,11 +48,11 @@ group :development, :test do
   gem 'debug', platforms: %i[mri windows]
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'httparty'
   gem 'rack-test'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '>= 3.9.0'
   gem 'shoulda-matchers'
-  gem 'httparty'
 end
 
 group :development do
