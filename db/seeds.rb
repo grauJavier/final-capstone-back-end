@@ -25,10 +25,11 @@ cities_data = [
 
 # Data Fetching Photos from Unsplash
 base_url = 'https://api.unsplash.com/search/photos?query='
-query = 'hotel room'.parameterize
 access_key = 'D5vfOwznTRQV6XfGv_rMQ2fsxPmwB41nSNimzUNUUJE'
+query = 'hotel room'.parameterize
+orientation = 'squarish'
 
-response = HTTParty.get(base_url, query: { query: query }, headers: { 'Authorization' => "Client-ID #{access_key}" })
+response = HTTParty.get(base_url, query: { query: query, orientation: orientation }, headers: { 'Authorization' => "Client-ID #{access_key}" })
 
 # Seed a place for each city
 cities_data.each do |city_name|
