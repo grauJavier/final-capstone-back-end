@@ -2,7 +2,13 @@ class PlacesController < ApplicationController
   before_action :find_places, only: %i[create update destroy]
 
   def index
-    places = Place.all
+    places = if params[:city_id].present?
+               Place.where(city_id: params[:city_id])
+             elsif params[:id].present?
+               Place.where(id: params[:id])
+             else
+               Place.all
+             end
     render json: places
   end
 
