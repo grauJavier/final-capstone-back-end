@@ -52,6 +52,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'rspec-rails', '>= 3.9.0'
   gem 'shoulda-matchers'
+  gem 'httparty'
 end
 
 group :development do
