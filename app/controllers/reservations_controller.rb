@@ -3,7 +3,14 @@ class ReservationsController < ApplicationController
 
   # GET
   def index
-    render json: @reservations, status: :ok
+    reservations = @reservations.includes(place: :city)
+
+    render json: reservations.as_json(
+        include: {
+          place: { only: %i[name image_url description],
+                include: { city: { only: :name } }
+          }
+    }), status: :ok
   end
 
   # GET
