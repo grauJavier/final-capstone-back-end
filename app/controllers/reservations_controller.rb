@@ -6,11 +6,11 @@ class ReservationsController < ApplicationController
     reservations = @reservations.includes(place: :city)
 
     render json: reservations.as_json(
-        include: {
-          place: { only: %i[name image_url description],
-                include: { city: { only: :name } }
-          }
-    }), status: :ok
+      include: {
+        place: { only: %i[name image_url description],
+                 include: { city: { only: :name } } }
+      }
+    ), status: :ok
   end
 
   # GET
