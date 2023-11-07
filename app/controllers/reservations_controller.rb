@@ -25,9 +25,9 @@ class ReservationsController < ApplicationController
 
     if reservation.save
       render json: reservation.as_json(
-      include: {
-        place: { only: %i[name image_url description],
-                 include: { city: { only: :name } } }
+        include: {
+          place: { only: %i[name image_url description],
+                   include: { city: { only: :name } } }
         }
       ), status: :ok
     else
