@@ -44,4 +44,17 @@ cities_data.each do |city_name|
   end
 end
 
+# Seed a details for each place
+Place.all.each do |place|
+  Detail.find_or_create_by!(place: place) do |detail|
+    detail.place = place
+    detail.place_type = "place type"
+    detail.bedrooms = 2
+    detail.beds = 1
+    detail.bathrooms = 1
+    detail.property_type = "property type"
+    detail.price = 100
+  end
+end
+
 puts 'Seeds created successfully!'
