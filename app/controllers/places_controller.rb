@@ -4,6 +4,8 @@ class PlacesController < ApplicationController
   def index
     places = if params[:city_id].present?
                Place.where(city_id: params[:city_id])
+             elsif params[:user_id].present?
+               Place.where(user_id: params[:user_id])
              elsif params[:id].present?
                Place.where(id: params[:id])
              else

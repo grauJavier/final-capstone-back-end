@@ -24,7 +24,12 @@ class ReservationsController < ApplicationController
     reservation = @reservations.new(reservation_params)
 
     if reservation.save
-      render json: reservation, status: :created
+      render json: reservation.as_json(
+        include: {
+          place: { only: %i[name image_url description],
+                   include: { city: { only: :name } } }
+        }
+      ), status: :ok
     else
       render json: { errors: reservation.errors.full_messages }, status: :unprocessable_entity
     end
