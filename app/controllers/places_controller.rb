@@ -11,7 +11,7 @@ class PlacesController < ApplicationController
              else
                Place.all
              end
-    render json: places
+    render json: places.as_json(include: { city: { only: %i[name] } })
   end
 
   def show
