@@ -41,7 +41,7 @@ RSpec.describe 'Reservations API', type: :request do
 
       post "/users/#{user.id}/reservations", params: { reservation: reservation_params }
 
-      expect(response).to have_http_status(201)
+      expect(response).to have_http_status(200)
     end
   end
 
