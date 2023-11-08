@@ -1,7 +1,15 @@
-# Seed User
-user = User.find_or_create_by!(email: 'graujavier@gmail.com') do |u|
-  u.username = 'Javier'
-  u.password = '123456'
+# Seed Users
+users_data = [
+  { email: 'graujavier@gmail.com', username: 'Javier', password: '123456' },
+  { email: 'sanchezmanuel@gmail.com', username: 'Manuel', password: '123456' },
+  { email: 'vasquezanthony@gmail.com', username: 'Anthony', password: '123456' },
+]
+
+users = users_data.map do |user_data|
+  User.find_or_create_by!(email: user_data[:email]) do |u|
+    u.username = user_data[:username]
+    u.password = user_data[:password]
+  end
 end
 
 # Seed Cities
@@ -38,7 +46,7 @@ cities_data.each do |city_name|
   place_name = "Hotel in #{city_name}"
   
   Place.find_or_create_by!(name: place_name, city: city) do |place|
-    place.user = user
+    place.user = users.sample
     place.image_url = image_url
     place.description = "Description of #{place_name}"
   end
@@ -48,12 +56,12 @@ end
 Place.all.each do |place|
   Detail.find_or_create_by!(place: place) do |detail|
     detail.place = place
-    detail.place_type = "place type"
-    detail.bedrooms = 2
-    detail.beds = 1
-    detail.bathrooms = 1
-    detail.property_type = "property type"
-    detail.price = 100
+    detail.place_type = ["Room", "Entire Place"].sample
+    detail.bedrooms = rand(1..5)
+    detail.beds = rand(1..10)
+    detail.bathrooms = rand(1..5)
+    detail.property_type = ["Apartment", "House", "Guest House", "Hotel"].sample
+    detail.price = rand(500..5000)
   end
 end
 
