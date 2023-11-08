@@ -31,6 +31,9 @@ cities_data = [
   'Moscow, Russia'
 ]
 
+adjectives = ["Beautiful", "Gorgeous", "Brilliant", "Charming", "Elegant", "Fascinating", "Graceful", "Incredible", "Magnificent"]
+property_type = ["Apartment", "House", "Guest House", "Hotel"]
+
 # Data Fetching Photos from Unsplash
 base_url = 'https://api.unsplash.com/search/photos?query='
 access_key = 'D5vfOwznTRQV6XfGv_rMQ2fsxPmwB41nSNimzUNUUJE'
@@ -43,7 +46,7 @@ response = HTTParty.get(base_url, query: { query: query, orientation: orientatio
 cities_data.each do |city_name|
   city = City.find_or_create_by!(name: city_name)
   image_url = response['results'].sample['urls']['regular']
-  place_name = "Hotel in #{city_name}"
+  place_name = "#{adjectives.sample} #{property_type.sample}"
   
   Place.find_or_create_by!(name: place_name, city: city) do |place|
     place.user = users.sample
@@ -60,7 +63,7 @@ Place.all.each do |place|
     detail.bedrooms = rand(1..5)
     detail.beds = rand(1..10)
     detail.bathrooms = rand(1..5)
-    detail.property_type = ["Apartment", "House", "Guest House", "Hotel"].sample
+    detail.property_type = property_type.sample
     detail.price = rand(500..5000)
   end
 end
