@@ -190,7 +190,7 @@ rspec
 [API Documentation]()
 
 
-![API Methods](api.png)
+![API Methods](./src/API_documentation.png)
 
 </div>
 
@@ -198,19 +198,20 @@ rspec
 
 ## 👥 Authors <a name="authors"></a>
 
+👤 **Javier Grau**
+
+- GitHub: [@grauJavier](https://github.com/grauJavier)
+
+👤 **Manuel Sanchez**
+
+- GitHub: [@Luffytaro22](https://github.com/Luffytaro22)
+- LinkedIn: [Manuel Sanchez](https://www.linkedin.com/in/manuel-alejandro-sanchez-sierra/)
+
 👤 **lRebornsl**
 
 - GitHub: [@lRebornsl](https://github.com/lRebornsl)
 - Twitter: [@RebornsDev](https://twitter.com/RebornsDev)
 - LinkedIn: [Anthony Vásquez](https://www.linkedin.com/in/avvm98/)
-
-👤 **Javier Grau**
-
-- GitHub: [@PabloBona](https://github.com/grauJavier)
-
-👤 **Manuel Sanchez**
-
-- GitHub: [@PabloBona](https://github.com/Luffytaro22)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
