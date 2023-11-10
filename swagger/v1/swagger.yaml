@@ -1,0 +1,468 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/cities":
+    get:
+      summary: Retrieves a list of cities
+      tags:
+      - Cities
+      responses:
+        '200':
+          description: cities found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    name:
+                      type: string
+  "/users/{user_id}/places/{place_id}/city":
+    get:
+      summary: Retrieves a city
+      tags:
+      - Cities
+      parameters:
+      - name: user_id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: string
+      - name: place_id
+        in: path
+        description: Place ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: city found
+        '404':
+          description: city not found
+  "/places/{place_id}/details":
+    get:
+      summary: Retrieves details for a specific place
+      tags:
+      - Details
+      parameters:
+      - name: place_id
+        in: path
+        description: Place ID
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: details found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  place:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      user_id:
+                        type: integer
+                      image_url:
+                        type: string
+                      description:
+                        type: string
+                      city:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          id:
+                            type: integer
+                        required:
+                        - name
+                        - id
+                    required:
+                    - name
+                    - user_id
+                    - image_url
+                    - description
+                    - city
+        '404':
+          description: details not found
+  "/places":
+    get:
+      summary: Retrieves a list of places
+      tags:
+      - Places
+      parameters:
+      - name: user_id
+        in: query
+        description: User ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: places found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    city:
+                      name:
+                        type: string
+                    name:
+                      type: string
+                    image_url:
+                      type: string
+                    description:
+                      type: string
+  "/places/{id}":
+    get:
+      summary: Retrieves a place
+      tags:
+      - Places
+      parameters:
+      - name: id
+        in: path
+        description: Place ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: place found
+        '404':
+          description: place not found
+  "/users/{user_id}/places":
+    post:
+      summary: Creates a place
+      tags:
+      - Places
+      parameters:
+      - name: user_id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: place created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                place:
+                  type: object
+                  properties:
+                    city_id:
+                      type: integer
+                    name:
+                      type: string
+                    image_url:
+                      type: string
+                    description:
+                      type: string
+                  required:
+                  - city_id
+                  - name
+                  - image_url
+                  - description
+                details:
+                  type: object
+                  properties:
+                    place_type:
+                      type: string
+                    bedrooms:
+                      type: integer
+                    beds:
+                      type: integer
+                    bathrooms:
+                      type: integer
+                    property_type:
+                      type: string
+                    price:
+                      type: integer
+                  required:
+                  - place_type
+                  - bedrooms
+                  - beds
+                  - bathrooms
+                  - property_type
+                  - price
+              required:
+              - place
+              - details
+  "/users/{user_id}/places/{id}":
+    put:
+      summary: Updates a place
+      tags:
+      - Places
+      parameters:
+      - name: user_id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: Place ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: place updated
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                place:
+                  type: object
+                  properties:
+                    city_id:
+                      type: integer
+                    name:
+                      type: string
+                    image_url:
+                      type: string
+                    description:
+                      type: string
+                details:
+                  type: object
+                  properties:
+                    place_type:
+                      type: string
+                    bedrooms:
+                      type: integer
+                    beds:
+                      type: integer
+                    bathrooms:
+                      type: integer
+                    property_type:
+                      type: string
+                    price:
+                      type: integer
+              required:
+              - place
+              - details
+    delete:
+      summary: Deletes a place
+      tags:
+      - Places
+      parameters:
+      - name: user_id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+      - name: id
+        in: path
+        description: Place ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: place deleted
+        '404':
+          description: place not found
+  "/users/{user_id}/reservations":
+    get:
+      summary: Retrieves a list of reservations
+      tags:
+      - Reservations
+      parameters:
+      - name: user_id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: reservations found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    place:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        image_url:
+                          type: string
+                        description:
+                          type: string
+                        city:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+    post:
+      summary: Creates a reservation
+      tags:
+      - Reservations
+      parameters:
+      - name: user_id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: reservation created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                place_id:
+                  type: integer
+                schedule_date:
+                  type: string
+                  format: date
+              required:
+              - place_id
+              - schedule_date
+  "/users/{user_id}/reservations/{id}":
+    get:
+      summary: Retrieves a reservation
+      tags:
+      - Reservations
+      parameters:
+      - name: user_id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+      - name: id
+        in: path
+        description: Reservation ID
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: reservation found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/definitions/reservation"
+        '404':
+          description: reservation not found
+    put:
+      summary: Updates a reservation
+      tags:
+      - Reservations
+      parameters:
+      - name: user_id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+      - name: id
+        in: path
+        description: Reservation ID
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: reservation updated
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                place_id:
+                  type: integer
+                schedule_date:
+                  type: string
+                  format: date
+    delete:
+      summary: Deletes a reservation
+      tags:
+      - Reservations
+      parameters:
+      - name: user_id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+      - name: id
+        in: path
+        description: Reservation ID
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: reservation deleted
+        '404':
+          description: reservation not found
+  "/signup":
+    post:
+      summary: Create a new user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '201':
+          description: user created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                    email:
+                      type: string
+                    password:
+                      type: string
+                  required:
+                  - username
+                  - email
+                  - password
+              required:
+              - user
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com
