@@ -41,8 +41,6 @@ paths:
       responses:
         '200':
           description: city found
-        '404':
-          description: city not found
   "/places/{place_id}/details":
     get:
       summary: Retrieves details for a specific place
@@ -58,40 +56,6 @@ paths:
       responses:
         '200':
           description: details found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  place:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                      user_id:
-                        type: integer
-                      image_url:
-                        type: string
-                      description:
-                        type: string
-                      city:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                          id:
-                            type: integer
-                        required:
-                        - name
-                        - id
-                    required:
-                    - name
-                    - user_id
-                    - image_url
-                    - description
-                    - city
-        '404':
-          description: details not found
   "/places":
     get:
       summary: Retrieves a list of places
@@ -136,8 +100,6 @@ paths:
       responses:
         '200':
           description: place found
-        '404':
-          description: place not found
   "/users/{user_id}/places":
     post:
       summary: Creates a place
@@ -151,9 +113,7 @@ paths:
         schema:
           type: string
       responses:
-        '201':
-          description: place created
-        '422':
+        '400':
           description: invalid request
       requestBody:
         content:
@@ -223,7 +183,7 @@ paths:
       responses:
         '200':
           description: place updated
-        '422':
+        '404':
           description: invalid request
       requestBody:
         content:
@@ -242,6 +202,11 @@ paths:
                       type: string
                     description:
                       type: string
+                  required:
+                  - city_id
+                  - name
+                  - image_url
+                  - description
                 details:
                   type: object
                   properties:
@@ -257,6 +222,13 @@ paths:
                       type: string
                     price:
                       type: integer
+                  required:
+                  - place_type
+                  - bedrooms
+                  - beds
+                  - bathrooms
+                  - property_type
+                  - price
               required:
               - place
               - details
@@ -368,12 +340,6 @@ paths:
       responses:
         '200':
           description: reservation found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/definitions/reservation"
-        '404':
-          description: reservation not found
     put:
       summary: Updates a reservation
       tags:
@@ -394,7 +360,7 @@ paths:
       responses:
         '200':
           description: reservation updated
-        '422':
+        '404':
           description: invalid request
       requestBody:
         content:
@@ -436,7 +402,7 @@ paths:
       - Users
       parameters: []
       responses:
-        '201':
+        '200':
           description: user created
         '422':
           description: invalid request

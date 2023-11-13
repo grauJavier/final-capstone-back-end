@@ -55,8 +55,8 @@ group :development, :test do
   gem 'rack-test'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '>= 3.9.0'
-  gem 'shoulda-matchers'
   gem 'rswag-specs'
+  gem 'shoulda-matchers'
 end
 
 group :development do

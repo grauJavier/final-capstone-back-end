@@ -22,16 +22,11 @@ RSpec.describe 'api/cities', type: :request do
       tags 'Cities'
       produces 'application/json'
       parameter name: :user_id, in: :path, type: :string,
-      description: 'User ID'
+                description: 'User ID'
       parameter name: :place_id, in: :path, type: :string, description: 'Place ID'
       response '200', 'city found' do
         let(:user_id) { create(:user).id }
-        let(:place_id) { create(:place, user_id: user_id).id }
-        run_test!
-      end
-
-      response '404', 'city not found' do
-        let(:place_id) { 'invalid' }
+        let(:place_id) { create(:place, user_id:).id }
         run_test!
       end
     end

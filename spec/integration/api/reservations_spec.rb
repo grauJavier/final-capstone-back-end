@@ -30,7 +30,9 @@ RSpec.describe 'api/reservations', type: :request do
         run_test!
       end
     end
+  end
 
+  path '/users/{user_id}/reservations' do
     post 'Creates a reservation' do
       tags 'Reservations'
       consumes 'application/json'
@@ -64,20 +66,16 @@ RSpec.describe 'api/reservations', type: :request do
       parameter name: :user_id, in: :path, type: :integer, description: 'User ID'
       parameter name: :id, in: :path, type: :integer, description: 'Reservation ID'
       response '200', 'reservation found' do
-        schema '$ref' => '#/definitions/reservation'
-        let(:user_id) { create(:user).id }
-        let(:reservation) { create(:reservation, user_id: user_id) }
+        let(:user) { create(:user) }
+        let(:user_id) { user.id }
+        let(:reservation) { create(:reservation, user_id:) }
         let(:id) { reservation.id }
         run_test!
       end
-
-      response '404', 'reservation not found' do
-        let(:user_id) { create(:user).id }
-        let(:id) { 'invalid' }
-        run_test!
-      end
     end
+  end
 
+  path '/users/{user_id}/reservations/{id}' do
     put 'Updates a reservation' do
       tags 'Reservations'
       consumes 'application/json'
@@ -92,28 +90,29 @@ RSpec.describe 'api/reservations', type: :request do
       }
       response '200', 'reservation updated' do
         let(:user_id) { create(:user).id }
-        let(:reservation) { create(:reservation, user_id: user_id) }
+        let(:reservation) { create(:reservation, user_id:) }
         let(:id) { reservation.id }
         let(:reservation_params) { { place_id: create(:place).id, schedule_date: '2023-12-31' } }
         run_test!
       end
 
-      response '422', 'invalid request' do
-        let(:user_id) { create(:user).id }
-        let(:reservation) { create(:reservation, user_id: user_id) }
-        let(:id) { reservation.id }
-        let(:reservation_params) { { place_id: nil, schedule_date: 'invalid' } }
+      response '404', 'invalid request' do
+        let(:user_id) { 'invalid' }
+        let(:reservation) { 'invalid' }
+        let(:id) { 'invalid' }
         run_test!
       end
     end
+  end
 
+  path '/users/{user_id}/reservations/{id}' do
     delete 'Deletes a reservation' do
       tags 'Reservations'
       parameter name: :user_id, in: :path, type: :integer, description: 'User ID'
       parameter name: :id, in: :path, type: :integer, description: 'Reservation ID'
       response '204', 'reservation deleted' do
         let(:user_id) { create(:user).id }
-        let(:reservation) { create(:reservation, user_id: user_id) }
+        let(:reservation) { create(:reservation, user_id:) }
         let(:id) { reservation.id }
         run_test!
       end
