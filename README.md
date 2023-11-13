@@ -86,12 +86,12 @@ This project was completed by three Team members:
 
 ### Key Features <a name="key-features"></a>
 
-- [x] **Ruby on Rails**
-- [x] **API Endpoint**
-- [x] **Professional Documentation**
-- [x] **Linting for Code Quality**
-- [x] **Postgres Database**
-- [x] **Git Version Control**
+- **Ruby on Rails**
+- **API Endpoint**
+- **Professional Documentation**
+- **Linting for Code Quality**
+- **Postgres Database**
+- **Git Version Control**
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
