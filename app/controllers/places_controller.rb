@@ -23,7 +23,7 @@ class PlacesController < ApplicationController
     place = @places.new(place_params)
     place.build_detail(details_params)
     if place.save
-      render json: place, status: :created
+      render json: place.as_json(include: { city: { only: %i[name] } }), status: :created
     else
       render json: place.errors, status: :unprocessable_entity
     end
