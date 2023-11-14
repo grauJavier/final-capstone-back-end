@@ -428,7 +428,4 @@ paths:
               required:
               - user
 servers:
-- url: http://{defaultHost}
-  variables:
-    defaultHost:
-      default: www.example.com
+- url: https://renteaze-d1cc8b293660.herokuapp.com
