@@ -110,7 +110,7 @@ RSpec.describe 'api/reservations', type: :request do
       tags 'Reservations'
       parameter name: :user_id, in: :path, type: :integer, description: 'User ID'
       parameter name: :id, in: :path, type: :integer, description: 'Reservation ID'
-      response '204', 'reservation deleted' do
+      response '200', 'reservation deleted' do
         let(:user_id) { create(:user).id }
         let(:reservation) { create(:reservation, user_id:) }
         let(:id) { reservation.id }

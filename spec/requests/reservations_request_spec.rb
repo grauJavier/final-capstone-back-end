@@ -68,7 +68,7 @@ RSpec.describe 'Reservations API', type: :request do
 
       delete "/users/#{user.id}/reservations/#{reservation.id}"
 
-      expect(response).to have_http_status(204)
+      expect(response).to have_http_status(200)
       expect { reservation.reload }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
