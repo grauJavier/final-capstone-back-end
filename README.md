@@ -201,6 +201,7 @@ rspec
 👤 **Javier Grau**
 
 - GitHub: [@grauJavier](https://github.com/grauJavier)
+- LinkedIn: [Javier Grau](https://www.linkedin.com/in/javiergrau)
 
 👤 **Manuel Sanchez**
 
