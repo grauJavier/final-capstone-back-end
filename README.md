@@ -132,6 +132,20 @@ Install this project with:
 - gem install rails
 - bundle install
 
+### Credentials setup
+In order to create databases and run the tests, you need to follow this steps:
+```
+1. Remove config/master.key and config/credentials.yml.enc if they exist.
+
+2. Run `rails secret`.  Copy the key.
+
+3. Run EDITOR="code --wait" bin/rails credentials:edit or EDITOR="code --wait" rails credentials:edit if you use Windows.
+
+4. In the editor that opens, add this:  devise_jwt_secret_key: <the key you copied in step 2>
+
+5. Save the file and close the editor.  New master.key, credentials.yml.enc files will be generated, and the key will be stored in `Rails.application.credentials.devise_jwt_secret_key`.
+```
+
 ### Database Setup
 
 Create and migrate your database with:
