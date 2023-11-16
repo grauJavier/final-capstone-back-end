@@ -127,7 +127,7 @@ RSpec.describe 'api/places', type: :request do
       parameter name: :user_id, in: :path, type: :integer, description: 'User ID'
       parameter name: :id, in: :path, type: :string, description: 'Place ID'
 
-      response '204', 'place deleted' do
+      response '200', 'place deleted' do
         let(:user_id) { create(:user).id }
         let(:place) { create(:place, user_id:) }
         let(:id) { place.id }

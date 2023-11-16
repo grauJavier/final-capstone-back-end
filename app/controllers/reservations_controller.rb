@@ -48,8 +48,11 @@ class ReservationsController < ApplicationController
   # DELETE
   def destroy
     reservation = @reservations.find(params[:id])
-    reservation.destroy
-    head :no_content
+    if reservation.destroy
+      render json: { message: 'Reservation deteled successfully!' }, status: :ok, head: :no_content
+    else
+      render json: reservation.errors, status: :unprocessable_entity, head: :no_content
+    end
   end
 
   private

@@ -41,8 +41,11 @@ class PlacesController < ApplicationController
 
   def destroy
     place = @places.find(params[:id])
-    place.destroy
-    head :no_content
+    if place.destroy
+      render json: { message: 'Place deteled successfully!' }, status: :ok, head: :no_content
+    else
+      render json: place.errors, status: :unprocessable_entity, head: :no_content
+    end
   end
 
   private
